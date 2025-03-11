@@ -61,7 +61,7 @@ python analise.py
 
 📌 A nota média dos 500 melhores estudantes foi 557.29, enquanto a média dos 40 aprovados foi 636.68, sugerindo que apenas os candidatos com notas bem acima da média geral conseguiram a aprovação.
 
-📌 A nota mínima para aprovação foi identificada em X pontos (a definir pelo código).
+📌 A nota mínima para aprovação foi de 619.21.
 
 📌 A análise dos boxplots indicou a presença de outliers nas disciplinas de Ciências da Natureza e Redação. O método IQR identificou 2 outliers em Ciências da Natureza e 1 em Redação.
 
