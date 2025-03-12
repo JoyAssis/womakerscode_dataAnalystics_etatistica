@@ -57,15 +57,40 @@ python analise.py
 
 ### 📌 Insights Obtidos
 
-📌 A maior variação de notas foi observada na disciplina Matemática, indicando uma maior dispersão dos resultados dos candidatos.
+A maior variação de notas foi observada na disciplina Matemática, indicando uma maior dispersão dos resultados dos candidatos.
 
-📌 A nota média dos 500 melhores estudantes foi 557.29, enquanto a média dos 40 aprovados foi 636.68, sugerindo que apenas os candidatos com notas bem acima da média geral conseguiram a aprovação.
+A nota média dos 500 melhores estudantes foi 557.29, enquanto a média dos 40 aprovados foi 636.68, sugerindo que apenas os candidatos com notas bem acima da média geral conseguiram a aprovação.
 
-📌 A nota mínima para aprovação foi de 619.21.
+A nota mínima para aprovação foi de 619.21.
 
-📌 A análise dos boxplots indicou a presença de outliers nas disciplinas de Ciências da Natureza e Redação. O método IQR identificou 2 outliers em Ciências da Natureza e 1 em Redação.
+A análise dos boxplots indicou a presença de outliers nas disciplinas de Ciências da Natureza e Redação. O método IQR identificou 2 outliers em Ciências da Natureza e 1 em Redação.
 
-📌 A remoção dos outliers será avaliada para entender seu impacto na média geral dos candidatos.
+A remoção dos outliers teve impacto mínimo (0.06% de alteração na média).
+→ Isso significa que os outliers não estavam distorcendo significativamente os dados.
+
+A substituição de valores nulos por média, mediana ou moda teve impacto 0.00% na média geral.
+→ Todas as medidas resultaram praticamente no mesmo valor médio após a substituição.
+
+O critério de escolha foi o menor impacto na distribuição.
+→ Como todas as medidas tiveram impacto quase zero, o critério usado foi que a média é geralmente a melhor opção quando os dados estão bem distribuídos e não têm assimetria extrema.
+
+Por que a média foi a melhor escolha?
+Os dados são simétricos ou aproximadamente normais
+
+Como vimos nos histogramas, as distribuições de notas não são extremamente assimétricas.
+Em distribuições simétricas, a média é o melhor estimador porque representa bem o "centro" dos dados.
+A moda pode não representar bem os dados
+
+A moda depende da frequência dos valores e pode não ser representativa se houver muitos valores únicos.
+No ENEM, por exemplo, poucas pessoas têm exatamente a mesma nota, então a moda pode não ser um bom substituto.
+A mediana é útil em distribuições muito assimétricas
+
+A mediana é uma boa escolha se houvesse valores extremos, mas como a remoção dos outliers não alterou significativamente a média, isso sugere que os dados não têm uma assimetria muito grande.
+
+📌 Conclusão
+✔️ Como os dados não foram muito afetados pela remoção de outliers, isso indica que não há grandes distorções na distribuição.
+✔️ Todas as medidas (média, mediana e moda) tiveram impacto praticamente nulo na alteração da média geral.
+✔️ A média foi escolhida porque é um bom estimador central quando os dados são aproximadamente normais e bem distribuídos.
 
 📢 Contribuição
 

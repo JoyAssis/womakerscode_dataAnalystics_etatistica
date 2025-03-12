@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from scipy.stats import mode
 
 
 # Carregando o dataset
@@ -14,7 +15,7 @@ dados = dados.dropna(subset=['Redação','Matemática', 'Linguagens', 'Ciências
 
 print(dados.isnull().sum())
 
-# Criando histogramas para Redação e Linguagens com intervalos de 20 pontos
+# 6 Criando histogramas para Redação e Linguagens com intervalos de 20 pontos
 # plt.figure(figsize=(12, 5))
 
 # # Histograma de Redação
@@ -35,7 +36,7 @@ print(dados.isnull().sum())
 
 # plt.figure(figsize=(12, 5))
 
-# # Histograma de Redação com range fixo
+# 7 Histograma de Redação com range fixo
 # plt.subplot(1, 2, 1)
 # plt.hist(dados['Redação'], bins=50, range=[0, 1000], color='blue', alpha=0.7, edgecolor='black')
 # plt.title('Histograma de Redação (0 a 1000)')
@@ -51,7 +52,7 @@ print(dados.isnull().sum())
 # plt.tight_layout()
 # plt.show()
 
-# # Criando boxplots
+# 8 Criando boxplots
 # plt.figure(figsize=(8, 6))
 # plt.boxplot([dados['Ciências da natureza'], dados['Redação']], labels=['Ciências da Natureza', 'Redação'], patch_artist=True)
 
@@ -97,3 +98,68 @@ lim_sup_redacao = Q3_redacao + 1.5 * IQR_redacao
 
 print(f"Limites para Ciências da Natureza: Inferior={lim_inf_natureza:.2f}, Superior={lim_sup_natureza:.2f}")
 print(f"Limites para Redação: Inferior={lim_inf_redacao:.2f}, Superior={lim_sup_redacao:.2f}")
+
+# 9 Dataframes sem os outliers
+dados_sem_outliers = dados.copy()
+
+for coluna in ['Ciências da natureza', 'Redação']:
+    Q1 = np.percentile(dados[coluna].dropna(), 25)
+    Q3 = np.percentile(dados[coluna].dropna(), 75)
+    IQR = Q3 - Q1
+    lim_inf = Q1 - 1.5 * IQR
+    lim_sup = Q3 + 1.5 * IQR
+    dados_sem_outliers = dados_sem_outliers[(dados_sem_outliers[coluna] >= lim_inf) & (dados_sem_outliers[coluna] <= lim_sup)]
+
+# 10 Comparando a média antes e depois
+media_original = dados[['Ciências da natureza', 'Redação']].mean().mean()
+media_sem_outliers = dados_sem_outliers[['Ciências da natureza', 'Redação']].mean().mean()
+
+# Verificando a alteração em porcentagem
+diferenca = abs(media_original - media_sem_outliers) / media_original * 100
+
+print(f"Média original: {media_original:.2f}")
+print(f"Média sem outliers: {media_sem_outliers:.2f}")
+print(f"Alteração na média: {diferenca:.2f}%")
+
+if diferenca > 5:
+    print("A remoção dos outliers alterou significativamente a média (acima de 5%).")
+else:
+    print("A remoção dos outliers não alterou significativamente a média.")
+
+# Criar cópias do dataset com valores nulos substituídos
+colunas_numericas = dados.select_dtypes(include=['number']).columns
+
+dados_media = dados.copy()
+dados_mediana = dados.copy()
+dados_moda = dados.copy()
+
+dados_media[colunas_numericas] = dados[colunas_numericas].fillna(dados[colunas_numericas].mean())
+dados_mediana[colunas_numericas] = dados[colunas_numericas].fillna(dados[colunas_numericas].median())
+dados_moda[colunas_numericas] = dados[colunas_numericas].fillna(dados[colunas_numericas].mode().iloc[0])  # Pega a primeira moda encontrada
+
+# Calcular médias e desvios padrões antes e depois
+media_original = dados[colunas_numericas].mean()
+desvio_original = dados[colunas_numericas].std()
+
+media_media = dados_media[colunas_numericas].mean()
+desvio_media = dados_media[colunas_numericas].std()
+
+media_mediana = dados_mediana[colunas_numericas].mean()
+desvio_mediana = dados_mediana[colunas_numericas].std()
+
+media_moda = dados_moda[colunas_numericas].mean()
+desvio_moda = dados_moda[colunas_numericas].std()
+
+# Comparação das alterações
+dif_media = abs(media_original - media_media).mean()
+dif_mediana = abs(media_original - media_mediana).mean()
+dif_moda = abs(media_original - media_moda).mean()
+
+# Verificar qual medida afeta menos
+melhor_medida = min([('Média', dif_media), ('Mediana', dif_mediana), ('Moda', dif_moda)], key=lambda x: x[1])[0]
+
+print(f"Alteração média ao usar Média: {dif_media:.2f}")
+print(f"Alteração média ao usar Mediana: {dif_mediana:.2f}")
+print(f"Alteração média ao usar Moda: {dif_moda:.2f}")
+
+print(f"A melhor medida para substituir os valores nulos é: {melhor_medida}")
