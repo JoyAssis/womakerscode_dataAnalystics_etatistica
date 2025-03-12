@@ -16,50 +16,50 @@ dados = dados.dropna(subset=['Redação','Matemática', 'Linguagens', 'Ciências
 print(dados.isnull().sum())
 
 # 6 Criando histogramas para Redação e Linguagens com intervalos de 20 pontos
-# plt.figure(figsize=(12, 5))
+plt.figure(figsize=(12, 5))
 
-# # Histograma de Redação
-# plt.subplot(1, 2, 1)
-# plt.hist(dados['Redação'], bins=range(0, 1001, 20), color='blue', alpha=0.7, edgecolor='black')
-# plt.title('Histograma de Redação')
-# plt.xlabel('Nota')
-# plt.ylabel('Frequência')
+# Histograma de Redação
+plt.subplot(1, 2, 1)
+plt.hist(dados['Redação'], bins=range(0, 1001, 20), color='blue', alpha=0.7, edgecolor='black')
+plt.title('Histograma de Redação')
+plt.xlabel('Nota')
+plt.ylabel('Frequência')
 
-# # Histograma de Linguagens
-# plt.subplot(1, 2, 2)
-# plt.hist(dados['Linguagens'], bins=range(0, 1001, 20), color='green', alpha=0.7, edgecolor='black')
-# plt.title('Histograma de Linguagens')
-# plt.xlabel('Nota')
+# Histograma de Linguagens
+plt.subplot(1, 2, 2)
+plt.hist(dados['Linguagens'], bins=range(0, 1001, 20), color='green', alpha=0.7, edgecolor='black')
+plt.title('Histograma de Linguagens')
+plt.xlabel('Nota')
 
-# plt.tight_layout()
-# plt.show()
+plt.tight_layout()
+plt.show()
 
-# plt.figure(figsize=(12, 5))
+plt.figure(figsize=(12, 5))
 
 # 7 Histograma de Redação com range fixo
-# plt.subplot(1, 2, 1)
-# plt.hist(dados['Redação'], bins=50, range=[0, 1000], color='blue', alpha=0.7, edgecolor='black')
-# plt.title('Histograma de Redação (0 a 1000)')
-# plt.xlabel('Nota')
-# plt.ylabel('Frequência')
+plt.subplot(1, 2, 1)
+plt.hist(dados['Redação'], bins=50, range=[0, 1000], color='blue', alpha=0.7, edgecolor='black')
+plt.title('Histograma de Redação (0 a 1000)')
+plt.xlabel('Nota')
+plt.ylabel('Frequência')
 
 # # Histograma de Linguagens com range fixo
-# plt.subplot(1, 2, 2)
-# plt.hist(dados['Linguagens'], bins=50, range=[0, 1000], color='green', alpha=0.7, edgecolor='black')
-# plt.title('Histograma de Linguagens (0 a 1000)')
-# plt.xlabel('Nota')
+plt.subplot(1, 2, 2)
+plt.hist(dados['Linguagens'], bins=50, range=[0, 1000], color='green', alpha=0.7, edgecolor='black')
+plt.title('Histograma de Linguagens (0 a 1000)')
+plt.xlabel('Nota')
 
-# plt.tight_layout()
-# plt.show()
+plt.tight_layout()
+plt.show()
 
 # 8 Criando boxplots
-# plt.figure(figsize=(8, 6))
-# plt.boxplot([dados['Ciências da natureza'], dados['Redação']], labels=['Ciências da Natureza', 'Redação'], patch_artist=True)
+plt.figure(figsize=(8, 6))
+plt.boxplot([dados['Ciências da natureza'], dados['Redação']], labels=['Ciências da Natureza', 'Redação'], patch_artist=True)
 
-# plt.title("Boxplot das Notas de Ciências da Natureza e Redação")
-# plt.ylabel("Nota")
-# plt.grid(axis='y', linestyle='--', alpha=0.7)
-# plt.show()
+plt.title("Boxplot das Notas de Ciências da Natureza e Redação")
+plt.ylabel("Nota")
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.show()
 
 # Identificando outliers pelo método IQR
 def encontrar_outliers(coluna):

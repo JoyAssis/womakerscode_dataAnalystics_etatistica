@@ -11,20 +11,20 @@ dados = pd.read_json('enem_2023.json')
 print(dados.head())
 
 # Verificando as informações do dataset
-#print(dados.info())
+print(dados.info())
 
 # Verificando a quantidade de valores nulos
-# print(dados.isnull().sum())
+print(dados.isnull().sum())
 
 # Verificando a quantidade de valores únicos
-#print(dados.nunique())
+print(dados.nunique())
 
 #1 Qual disciplina tem maior amplitude?
-# amplitude = dados.drop(columns=['Sexo']).max() - dados.drop(columns=['Sexo']).min()
-# materia_maior_amplitude = amplitude.idxmax()
-# maior_amplitude = amplitude.max()
+amplitude = dados.drop(columns=['Sexo']).max() - dados.drop(columns=['Sexo']).min()
+materia_maior_amplitude = amplitude.idxmax()
+maior_amplitude = amplitude.max()
 
-# print(f"A disciplina com maior amplitude de notas é {materia_maior_amplitude} com uma amplitude de {maior_amplitude:.2f}")
+print(f"A disciplina com maior amplitude de notas é {materia_maior_amplitude} com uma amplitude de {maior_amplitude:.2f}")
 
 #Qual média e mediana de cada disciplina?
 media_mediana = dados.drop(columns=['Sexo']).agg(['mean', 'median']) #agg é uma função que permite aplicar várias funções de uma vez, nesse caso, média e mediana para cada disciplina (coluna) do dataset. A mean e a median são funções que já ignoram os valores nulos por padrão.
